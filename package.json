@@ -1,0 +1,33 @@
+{
+  "name": "@glif/mock-contracts",
+  "version": "0.0.0",
+  "description": "Mock contracts for interacting with the Glif Pools",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "deploy": "npx hardhat run scripts/deploy.ts",
+    "local-node": "anvil",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glifio/mock-fevm-staking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glifio/mock-fevm-staking/issues"
+  },
+  "homepage": "https://github.com/glifio/mock-fevm-staking#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.11.2",
+    "hardhat-preprocessor": "^0.1.5"
+  },
+  "dependencies": {
+    "@glif/filecoin-rpc-client": "^2.0.7"
+  }
+}
