@@ -9,6 +9,7 @@
   },
   "scripts": {
     "deploy": "npx hardhat run scripts/deploy.ts --network wallaby",
+    "name": "npx hardhat run scripts/name.ts --network wallaby",
     "local-node": "anvil",
     "test": "test"
   },
