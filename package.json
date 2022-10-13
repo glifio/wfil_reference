@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "deploy": "npx hardhat run scripts/deploy.ts",
+    "deploy": "npx hardhat run scripts/deploy.ts --network wallaby",
     "local-node": "anvil",
     "test": "test"
   },
@@ -28,6 +28,8 @@
     "hardhat-preprocessor": "^0.1.5"
   },
   "dependencies": {
-    "@glif/filecoin-rpc-client": "^2.0.7"
+    "@babel/runtime": "^7.19.4",
+    "@glif/filecoin-address": "^2.0.1",
+    "@glif/filecoin-rpc-client": "^2.0.8"
   }
 }

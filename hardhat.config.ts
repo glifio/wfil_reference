@@ -17,6 +17,11 @@ const config: HardhatUserConfig = {
     hardhat: {},
     wallaby: {
       url: "https://wallaby.node.glif.io/rpc/v0",
+      chainId: 31415,
+      // be careful....
+      accounts: [
+        "8182b5bf5b9c966e001934ebaf008f65516290cef6e3069d11e718cbd4336aae",
+      ],
     },
   },
   preprocess: {
