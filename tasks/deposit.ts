@@ -4,8 +4,9 @@ import { WFIL } from "../typechain-types";
 declare var task: any;
 declare var ethers: typeof Ethers;
 
-task("name", "Gets the name of the WFIL token")
+task("deposit", "Deposit FIL for wrapped FIL")
   .addParam("contract", "The address the WFIL contract")
+  .addParam("amount", "The amount to deposit")
   .setAction(async (taskArgs: { contract: string }) => {
     try {
       const [signer] = await ethers.getSigners();
@@ -16,8 +17,8 @@ task("name", "Gets the name of the WFIL token")
         signer
       ) as WFIL;
 
-      const name = await contract.name();
-      console.log("Name: ", name);
+      const deposit = await contract.deposit({ value: 1000000 });
+      // console.log(deposit);
     } catch (err) {
       const msg = err instanceof Error ? err.message : JSON.stringify(err);
       console.error(`Error when fetching name from wfil contract: ${msg}`);
