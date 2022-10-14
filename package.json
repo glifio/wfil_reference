@@ -8,7 +8,10 @@
     "test": "test"
   },
   "scripts": {
+    "balanceOf": "npx hardhat run scripts/balanceOf.ts --network wallaby",
     "deploy": "npx hardhat run scripts/deploy.ts --network wallaby",
+    "deploy2": "npx hardhat --network wallaby deploy",
+    "deposit": "npx hardhat run scripts/deposit.ts --network wallaby",
     "name": "npx hardhat run scripts/name.ts --network wallaby",
     "local-node": "anvil",
     "test": "test"
@@ -31,6 +34,8 @@
   "dependencies": {
     "@babel/runtime": "^7.19.4",
     "@glif/filecoin-address": "^2.0.1",
-    "@glif/filecoin-rpc-client": "^2.0.8"
+    "@glif/filecoin-rpc-client": "^2.0.8",
+    "hardhat-deploy": "^0.11.18",
+    "hardhat-deploy-ethers": "^0.3.0-beta.13"
   }
 }

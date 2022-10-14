@@ -1,9 +1,14 @@
+import "hardhat-deploy";
+import "hardhat-deploy-ethers";
+
 import RpcEngine from "@glif/filecoin-rpc-client";
 import fa from "@glif/filecoin-address";
-import hre, { ethers } from "hardhat";
+import { ethers } from "hardhat";
 import { HttpNetworkConfig } from "hardhat/types";
 
-async function main() {
+module.exports = async (hre: any) => {
+  const deploy = hre.deployments.deploy;
+
   try {
     const config = hre.network.config as HttpNetworkConfig;
     // generate the f1 address equivalent from the same private key
@@ -24,8 +29,9 @@ async function main() {
     const nonce = await filRpc.request("MpoolGetNonce", f1addr);
     const priorityFee = await ethRpc.request("maxPriorityFeePerGas");
 
-    const wfil = await hre.ethers.getContractFactory("WFIL");
-    const contract = await wfil.deploy({
+    await deploy("WFIL", {
+      from: w.address,
+      args: [],
       // since it's difficult to estimate the gas limit before f4 address is launched, it's safer to manually set
       // a large gasLimit. This should be addressed in the following releases.
       gasLimit: 1000000000, // BlockGasLimit / 10
@@ -33,20 +39,10 @@ async function main() {
       // maxPriorityFeePerGas to instruct hardhat to use EIP-1559 tx format
       maxPriorityFeePerGas: priorityFee,
       nonce,
+      log: true,
     });
-
-    await contract.deployed();
-
-    console.log(`Successfully deployed at ${contract.address}`);
   } catch (err) {
     const msg = err instanceof Error ? err.message : JSON.stringify(err);
     console.error(`Error when deploying contract: ${msg}`);
   }
-}
-
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+};

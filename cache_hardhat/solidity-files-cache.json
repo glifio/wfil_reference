@@ -19,16 +19,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -62,16 +69,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -104,16 +118,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -144,16 +165,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -191,16 +219,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -237,16 +272,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -277,16 +319,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -321,16 +370,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -361,16 +417,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -403,16 +466,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -443,16 +513,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
@@ -483,16 +560,23 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
           },
+          "metadata": {
+            "useLiteralContent": true
+          },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363635363938383434323339"
+              "__CACHE_BREAKER__": "0x0000000000000031363635373835343734393539"
             }
           }
         }
