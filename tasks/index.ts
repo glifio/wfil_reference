@@ -1,2 +1,3 @@
 exports.name = require("./name");
-exports.name = require("./deposit");
+exports.deposit = require("./deposit");
+exports.balanceOf = require("./balanceOf");

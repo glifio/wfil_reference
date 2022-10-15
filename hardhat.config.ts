@@ -15,6 +15,7 @@ function getRemappings() {
 
 const config: HardhatUserConfig = {
   solidity: "0.8.15",
+  defaultNetwork: "wallaby",
   networks: {
     hardhat: {},
     wallaby: {

@@ -10,6 +10,7 @@ npx hardhat test
 REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat deploy
-npx hardhat name --contract 0xFF000000000000000000000000000000000004CC --network wallaby
-npx hardhat deposit --contract 0xFF000000000000000000000000000000000004CC --network wallaby
+npx hardhat name --contract <contract-address-hex>
+npx hardhat deposit --contract <contract-address-hex> --amount <amount-in-eth>
+npx hardhat balanceOf --contract <contract-address-hex> --actor <actor-id-hex>
 ```
