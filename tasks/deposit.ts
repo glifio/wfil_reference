@@ -55,7 +55,7 @@ task("deposit", "Deposit FIL for wrapped FIL")
       const priorityFee = await ethRpc.request("maxPriorityFeePerGas");
       const nonce = await filRpc.request("MpoolGetNonce", secpActor);
 
-      var txObject = {
+      const txObject = {
         nonce,
         gasLimit: 1000000000, // BlockGasLimit / 10
         to: taskArgs.contract,
