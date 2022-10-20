@@ -1,30 +1,13 @@
 import RpcEngine from "@glif/filecoin-rpc-client";
-import { newSecp256k1Address } from "@glif/filecoin-address";
 import { ethers as Ethers } from "hardhat";
 import { HttpNetworkConfig } from "hardhat/types";
 import { FeeMarketEIP1559Transaction } from "@ethereumjs/tx";
 import { WFIL } from "../typechain-types";
+import { deriveAddrsFromPk } from "../utils";
 
 declare var task: any;
 declare var ethers: typeof Ethers;
 declare var network: { config: HttpNetworkConfig };
-
-const hexlify = (id: string) => {
-  const hexId = Number(id.slice(1)).toString(16);
-  return "0xff" + "0".repeat(38 - hexId.length) + hexId;
-};
-
-export const deriveAddrsFromPk = async (pk: string, apiAddress: string) => {
-  const w = new ethers.Wallet(pk);
-  const pubKey = Uint8Array.from(Buffer.from(w.publicKey.slice(2), "hex"));
-  const secpActor = newSecp256k1Address(pubKey).toString();
-  const filRpc = new RpcEngine({ apiAddress });
-
-  const idActor = await filRpc.request("StateLookupID", secpActor, null);
-  const idActorHex = hexlify(idActor);
-
-  return { secpActor, idActor, idActorHex };
-};
 
 task("deposit", "Deposit FIL for wrapped FIL")
   .addParam("contract", "The address the WFIL contract")

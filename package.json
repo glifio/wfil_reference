@@ -1,30 +1,27 @@
 {
-  "name": "@glif/mock-contracts",
+  "name": "wfil",
   "version": "0.0.0",
-  "description": "Mock contracts for interacting with the Glif Pools",
+  "description": "ERC20 implementation of the $FIL token",
   "main": "index.js",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "balanceOf": "npx hardhat run scripts/balanceOf.ts --network wallaby",
     "deploy": "npx hardhat --network wallaby deploy",
-    "deposit": "npx hardhat run scripts/deposit.ts --network wallaby",
-    "name": "npx hardhat run scripts/name.ts --network wallaby",
     "local-node": "anvil",
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/glifio/mock-fevm-staking.git"
+    "url": "git+https://github.com/Schwartz10/wfil.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/glifio/mock-fevm-staking/issues"
+    "url": "https://github.com/Schwartz10/wfil.git/issues"
   },
-  "homepage": "https://github.com/glifio/mock-fevm-staking#readme",
+  "homepage": "https://github.com/Schwartz10/wfil.git#readme",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "hardhat": "^2.11.2",
@@ -36,6 +33,7 @@
     "@ethereumjs/tx": "^4.0.0",
     "@glif/filecoin-address": "^2.0.1",
     "@glif/filecoin-rpc-client": "^2.0.8",
+    "@glif/filecoin-wallet-provider": "^2.0.11",
     "ethereumjs-tx": "^2.1.2",
     "hardhat-deploy": "^0.11.18",
     "hardhat-deploy-ethers": "^0.3.0-beta.13"
