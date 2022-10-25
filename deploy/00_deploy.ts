@@ -2,7 +2,7 @@ import "hardhat-deploy";
 import "hardhat-deploy-ethers";
 
 import RpcEngine from "@glif/filecoin-rpc-client";
-import fa from "@glif/filecoin-address";
+import fa, { newDelegatedEthAddress } from "@glif/filecoin-address";
 import { ethers } from "hardhat";
 import { HttpNetworkConfig } from "hardhat/types";
 
@@ -29,7 +29,7 @@ module.exports = async (hre: any) => {
     const nonce = await filRpc.request("MpoolGetNonce", f1addr);
     const priorityFee = await ethRpc.request("maxPriorityFeePerGas");
 
-    await deploy("WFIL", {
+    const { address } = await deploy("WFIL", {
       from: w.address,
       args: [],
       // since it's difficult to estimate the gas limit before f4 address is launched, it's safer to manually set
@@ -41,6 +41,8 @@ module.exports = async (hre: any) => {
       nonce,
       log: true,
     });
+
+    console.log(address, newDelegatedEthAddress(address).toString());
   } catch (err) {
     const msg = err instanceof Error ? err.message : JSON.stringify(err);
     console.error(`Error when deploying contract: ${msg}`);

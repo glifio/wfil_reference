@@ -1,4 +1,4 @@
-import { CoinType } from "@glif/filecoin-address";
+import { CoinType, newDelegatedEthAddress } from "@glif/filecoin-address";
 import RpcEngine from "@glif/filecoin-rpc-client";
 import { SECP256K1KeyProvider } from "@glif/filecoin-wallet-provider";
 
@@ -7,14 +7,30 @@ const hexlify = (id: string) => {
   return "0xff" + "0".repeat(38 - hexId.length) + hexId;
 };
 
-export const deriveAddrsFromPk = async (pk: string, apiAddress: string) => {
+export const deriveAddrsFromPk = async (
+  pk: string,
+  apiAddress: string,
+  ethAddr: string
+) => {
   // dont pass 0x to the SECP key provider
   const provider = new SECP256K1KeyProvider(pk.slice(2), "hex");
   const [secpActor] = await provider.getAccounts(0, 1, CoinType.TEST);
-  const filRpc = new RpcEngine({ apiAddress });
+  const delegatedActor = newDelegatedEthAddress(
+    ethAddr,
+    CoinType.TEST
+  ).toString();
 
-  const idActor = await filRpc.request("StateLookupID", secpActor, null);
-  const idActorHex = hexlify(idActor);
+  let idActor = "";
+  let idActorHex = "";
+  try {
+    const filRpc = new RpcEngine({ apiAddress });
+    idActor = await filRpc.request("StateLookupID", delegatedActor, null);
+    idActorHex = hexlify(idActor);
+  } catch (err) {
+    console.log(
+      `Actor ${delegatedActor} does not yet exist on chain. Try sending it some funds first. Error: ${err}`
+    );
+  }
 
-  return { secpActor, idActor, idActorHex };
+  return { secpActor, idActor, idActorHex, delegatedActor };
 };

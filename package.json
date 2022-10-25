@@ -31,7 +31,7 @@
     "@babel/runtime": "^7.19.4",
     "@ethereumjs/common": "^3.0.0",
     "@ethereumjs/tx": "^4.0.0",
-    "@glif/filecoin-address": "^2.0.1",
+    "@glif/filecoin-address": "^2.0.13",
     "@glif/filecoin-rpc-client": "^2.0.8",
     "@glif/filecoin-wallet-provider": "^2.0.11",
     "ethereumjs-tx": "^2.1.2",

@@ -4,6 +4,7 @@ import { HttpNetworkConfig } from "hardhat/types";
 import { FeeMarketEIP1559Transaction } from "@ethereumjs/tx";
 import { WFIL } from "../typechain-types";
 import { deriveAddrsFromPk } from "../utils";
+import { newDelegatedEthAddress } from "@glif/filecoin-address";
 
 declare var task: any;
 declare var ethers: typeof Ethers;
@@ -22,9 +23,10 @@ task("deposit", "Deposit FIL for wrapped FIL")
         signer
       ) as WFIL;
 
-      const { secpActor } = await deriveAddrsFromPk(
+      const { delegatedActor } = await deriveAddrsFromPk(
         (network.config.accounts as string[])[0],
-        network.config.url
+        network.config.url,
+        signer.address
       );
 
       const ethRpc = new RpcEngine({
@@ -36,7 +38,7 @@ task("deposit", "Deposit FIL for wrapped FIL")
       const data = contract.interface.encodeFunctionData("deposit");
       const filRpc = new RpcEngine({ apiAddress: network.config.url });
       const priorityFee = await ethRpc.request("maxPriorityFeePerGas");
-      const nonce = await filRpc.request("MpoolGetNonce", secpActor);
+      const nonce = await filRpc.request("MpoolGetNonce", delegatedActor);
 
       const txObject = {
         nonce,
@@ -60,6 +62,12 @@ task("deposit", "Deposit FIL for wrapped FIL")
       const rawTxHex = "0x" + serializedTx.toString("hex");
 
       const res = await ethRpc.request("sendRawTransaction", rawTxHex);
+
+      console.log({
+        ethAddr: res,
+        delegatedAddr: newDelegatedEthAddress(res).toString(),
+      });
+
       console.log(res);
     } catch (err) {
       const msg = err instanceof Error ? err.message : JSON.stringify(err);
