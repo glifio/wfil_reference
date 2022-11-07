@@ -13,7 +13,7 @@ Make sure you have installed:
 [Foundry](https://github.com/foundry-rs/foundry)<br />
 
 ```
-git clone git@github.com:Schwartz10/wfil.git
+git clone git@github.com:glifio/wfil.git
 cd wfil
 npm i
 ```
