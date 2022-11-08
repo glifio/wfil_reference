@@ -2,7 +2,7 @@ import "hardhat-deploy";
 import "hardhat-deploy-ethers";
 
 import RpcEngine from "@glif/filecoin-rpc-client";
-import fa, { newDelegatedEthAddress } from "@glif/filecoin-address";
+import fa, { delegatedFromEthAddress } from "@glif/filecoin-address";
 import { ethers } from "hardhat";
 import { HttpNetworkConfig } from "hardhat/types";
 
@@ -14,9 +14,7 @@ module.exports = async (hre: any) => {
     // generate the f1 address equivalent from the same private key
     // note this method of extracting private key from hre might be unsafe...
     const w = new ethers.Wallet((config.accounts as string[])[0]);
-    const pubKey = Uint8Array.from(Buffer.from(w.publicKey.slice(2), "hex"));
-    const f1addr = fa.newSecp256k1Address(pubKey).toString();
-    console.log("Native actor addr: ", f1addr);
+    const f4 = delegatedFromEthAddress(w.address)
     console.log("Eth addr: ", w.address);
 
     const filRpc = new RpcEngine({ apiAddress: config.url });
@@ -26,7 +24,7 @@ module.exports = async (hre: any) => {
       delimeter: "_",
     });
 
-    const nonce = await filRpc.request("MpoolGetNonce", f1addr);
+    const nonce = await filRpc.request("MpoolGetNonce", f4);
     const priorityFee = await ethRpc.request("maxPriorityFeePerGas");
 
     const { address } = await deploy("WFIL", {
@@ -42,7 +40,7 @@ module.exports = async (hre: any) => {
       log: true,
     });
 
-    console.log(address, newDelegatedEthAddress(address).toString());
+    console.log(address, f4);
   } catch (err) {
     const msg = err instanceof Error ? err.message : JSON.stringify(err);
     console.error(`Error when deploying contract: ${msg}`);

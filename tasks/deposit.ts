@@ -4,7 +4,7 @@ import { HttpNetworkConfig } from "hardhat/types";
 import { FeeMarketEIP1559Transaction } from "@ethereumjs/tx";
 import { WFIL } from "../typechain-types";
 import { deriveAddrsFromPk } from "../utils";
-import { newDelegatedEthAddress } from "@glif/filecoin-address";
+import { delegatedFromEthAddress } from "@glif/filecoin-address";
 
 declare var task: any;
 declare var ethers: typeof Ethers;
@@ -62,13 +62,7 @@ task("deposit", "Deposit FIL for wrapped FIL")
       const rawTxHex = "0x" + serializedTx.toString("hex");
 
       const res = await ethRpc.request("sendRawTransaction", rawTxHex);
-
-      console.log({
-        ethAddr: res,
-        delegatedAddr: newDelegatedEthAddress(res).toString(),
-      });
-
-      console.log(res);
+      console.log(`Explorer link: https://explorer.glif.io/wallaby/tx/${res}`);
     } catch (err) {
       const msg = err instanceof Error ? err.message : JSON.stringify(err);
       console.error(`Error when fetching name from wfil contract: ${msg}`);
