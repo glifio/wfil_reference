@@ -4,21 +4,25 @@ import { HttpNetworkConfig } from "hardhat/types";
 import { FeeMarketEIP1559Transaction } from "@ethereumjs/tx";
 import { WFIL } from "../typechain-types";
 import { deriveAddrsFromPk } from "../utils";
-import { delegatedFromEthAddress } from "@glif/filecoin-address";
 
 declare var task: any;
 declare var ethers: typeof Ethers;
 declare var network: { config: HttpNetworkConfig };
 
+interface TaskArgs {
+  contract: string
+  amount: string
+}
+
 task("deposit", "Deposit FIL for wrapped FIL")
   .addParam("contract", "The address the WFIL contract")
   .addParam("amount", "The amount to deposit")
-  .setAction(async (taskArgs: { contract: string; amount: string }) => {
+  .setAction(async ({ contract: contractAddr, amount }: TaskArgs) => {
     try {
       const [signer] = await ethers.getSigners();
       const WFIL = await ethers.getContractFactory("WFIL");
       const contract = new ethers.Contract(
-        taskArgs.contract,
+        contractAddr,
         WFIL.interface,
         signer
       ) as WFIL;
@@ -43,9 +47,9 @@ task("deposit", "Deposit FIL for wrapped FIL")
       const txObject = {
         nonce,
         gasLimit: 1000000000, // BlockGasLimit / 10
-        to: taskArgs.contract,
+        to: contractAddr,
         value: ethers.BigNumber.from(
-          ethers.utils.parseUnits(taskArgs.amount, "ether")
+          ethers.utils.parseUnits(amount, "ether")
         ).toHexString(),
         maxPriorityFeePerGas: priorityFee,
         maxFeePerGas: "0x2E90EDD000",
@@ -65,6 +69,6 @@ task("deposit", "Deposit FIL for wrapped FIL")
       console.log(`Explorer link: https://explorer.glif.io/wallaby/tx/${res}`);
     } catch (err) {
       const msg = err instanceof Error ? err.message : JSON.stringify(err);
-      console.error(`Error when fetching name from wfil contract: ${msg}`);
+      console.error(`Failed to deposit: ${msg}`);
     }
   });
