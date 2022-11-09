@@ -32,6 +32,8 @@ npm i
 ```
 npx hardhat name --contract <0x-contract-address>
 npx hardhat deposit --contract <0x-contract-address> --amount <amount-in-eth>
+npx hardhat transfer --contract <0x-contract-address> --amount <amount-in-eth> --to <actor-id-hex>
 npx hardhat balanceOf --contract <0x-contract-address> --actor <actor-id-hex>
+npx hardhat totalSupply --contract <0x-contract-address>
 npx hardhat decodeParams --params <base64-params> --return <base64-return>
 ```
