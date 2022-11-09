@@ -2,7 +2,7 @@ import "hardhat-deploy";
 import "hardhat-deploy-ethers";
 
 import RpcEngine from "@glif/filecoin-rpc-client";
-import fa, { delegatedFromEthAddress } from "@glif/filecoin-address";
+import { delegatedFromEthAddress } from "@glif/filecoin-address";
 import { ethers } from "hardhat";
 import { HttpNetworkConfig } from "hardhat/types";
 
@@ -15,7 +15,9 @@ module.exports = async (hre: any) => {
     // note this method of extracting private key from hre might be unsafe...
     const w = new ethers.Wallet((config.accounts as string[])[0]);
     const f4 = delegatedFromEthAddress(w.address)
-    console.log("Eth addr: ", w.address);
+
+    console.log(`Deployer eth addr: ${w.address}`);
+    console.log(`Deployer fil addr: ${f4}`);
 
     const filRpc = new RpcEngine({ apiAddress: config.url });
     const ethRpc = new RpcEngine({
@@ -40,7 +42,7 @@ module.exports = async (hre: any) => {
       log: true,
     });
 
-    console.log(address, f4);
+    console.log(`Contract address: ${address}`);
   } catch (err) {
     const msg = err instanceof Error ? err.message : JSON.stringify(err);
     console.error(`Error when deploying contract: ${msg}`);
