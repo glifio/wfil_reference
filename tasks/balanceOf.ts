@@ -11,7 +11,7 @@ interface TaskArgs {
 
 task("balanceOf", "Gets the wfil balance of the address passed")
   .addParam("actor", "The address of the account to query")
-  .addParam("contract", "The address the WFIL contract")
+  .addParam("contract", "The address of the WFIL contract")
   .setAction(async ({ contract: contractAddr, actor }: TaskArgs) => {
     try {
       const [signer] = await ethers.getSigners();

@@ -15,7 +15,7 @@ interface TaskArgs {
 }
 
 task("deposit", "Deposit FIL for wrapped FIL")
-  .addParam("contract", "The address the WFIL contract")
+  .addParam("contract", "The address of the WFIL contract")
   .addParam("amount", "The amount to deposit")
   .setAction(async ({ contract: contractAddr, amount }: TaskArgs) => {
     try {

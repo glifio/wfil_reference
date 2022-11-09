@@ -5,7 +5,7 @@ declare var task: any;
 declare var ethers: typeof Ethers;
 
 task("name", "Gets the name of the WFIL token")
-  .addParam("contract", "The address the WFIL contract")
+  .addParam("contract", "The address of the WFIL contract")
   .setAction(async (taskArgs: { contract: string }) => {
     try {
       const [signer] = await ethers.getSigners();

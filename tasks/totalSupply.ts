@@ -9,7 +9,7 @@ interface TaskArgs {
 }
 
 task("totalSupply", "Gets the total wfil supply in the contract")
-  .addParam("contract", "The address the WFIL contract")
+  .addParam("contract", "The address of the WFIL contract")
   .setAction(async ({ contract: contractAddr }: TaskArgs) => {
     try {
       const [signer] = await ethers.getSigners();
