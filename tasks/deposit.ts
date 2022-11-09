@@ -48,9 +48,7 @@ task("deposit", "Deposit FIL for wrapped FIL")
         nonce,
         gasLimit: 1000000000, // BlockGasLimit / 10
         to: contractAddr,
-        value: ethers.BigNumber.from(
-          ethers.utils.parseUnits(amount, "ether")
-        ).toHexString(),
+        value: ethers.utils.parseUnits(amount, "ether").toHexString(),
         maxPriorityFeePerGas: priorityFee,
         maxFeePerGas: "0x2E90EDD000",
         chainId: ethers.BigNumber.from(network.config.chainId).toHexString(),
