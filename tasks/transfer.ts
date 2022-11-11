@@ -12,12 +12,14 @@ declare var network: { config: HttpNetworkConfig };
 interface TaskArgs {
   contract: string
   amount: string
+  to: string
 }
 
-task("deposit", "Deposit FIL for wrapped FIL")
+task("transfer", "Transfer wrapped FIL to another account")
   .addParam("contract", "The address of the WFIL contract")
-  .addParam("amount", "The amount to deposit")
-  .setAction(async ({ contract: contractAddr, amount }: TaskArgs) => {
+  .addParam("amount", "The amount to transfer")
+  .addParam("to", "The address of the account to transfer to")
+  .setAction(async ({ contract: contractAddr, amount, to }: TaskArgs) => {
     try {
       const [signer] = await ethers.getSigners();
       const WFIL = await ethers.getContractFactory("WFIL");
@@ -39,7 +41,8 @@ task("deposit", "Deposit FIL for wrapped FIL")
         delimeter: "_",
       });
 
-      const data = contract.interface.encodeFunctionData("deposit");
+      const amountBigNr = ethers.utils.parseUnits(amount, "ether")
+      const data = contract.interface.encodeFunctionData("transfer", [to, amountBigNr]);
       const filRpc = new RpcEngine({ apiAddress: network.config.url });
       const priorityFee = await ethRpc.request("maxPriorityFeePerGas");
       const nonce = await filRpc.request("MpoolGetNonce", delegatedActor);
@@ -48,7 +51,7 @@ task("deposit", "Deposit FIL for wrapped FIL")
         nonce,
         gasLimit: 1000000000, // BlockGasLimit / 10
         to: contractAddr,
-        value: ethers.utils.parseUnits(amount, "ether").toHexString(),
+        value: "0x00",
         maxPriorityFeePerGas: priorityFee,
         maxFeePerGas: "0x2E90EDD000",
         chainId: ethers.BigNumber.from(network.config.chainId).toHexString(),
@@ -67,6 +70,6 @@ task("deposit", "Deposit FIL for wrapped FIL")
       console.log(`Explorer link: https://explorer.glif.io/wallaby/tx/${res}`);
     } catch (err) {
       const msg = err instanceof Error ? err.message : JSON.stringify(err);
-      console.error(`Failed to deposit: ${msg}`);
+      console.error(`Failed to transfer: ${msg}`);
     }
   });

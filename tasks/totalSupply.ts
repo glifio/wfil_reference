@@ -4,22 +4,26 @@ import { WFIL } from "../typechain-types";
 declare var task: any;
 declare var ethers: typeof Ethers;
 
-task("name", "Gets the name of the WFIL token")
+interface TaskArgs {
+  contract: string
+}
+
+task("totalSupply", "Gets the total wfil supply in the contract")
   .addParam("contract", "The address of the WFIL contract")
-  .setAction(async (taskArgs: { contract: string }) => {
+  .setAction(async ({ contract: contractAddr }: TaskArgs) => {
     try {
       const [signer] = await ethers.getSigners();
       const WFIL = await ethers.getContractFactory("WFIL");
       const contract = new ethers.Contract(
-        taskArgs.contract,
+        contractAddr,
         WFIL.interface,
         signer
       ) as WFIL;
 
-      const name = await contract.name();
-      console.log("Name: ", name);
-    } catch (err) {
+      const bal = await contract.totalSupply();
+      console.log(`Total wfil supply: ${ethers.utils.formatEther(bal)}`);
+    } catch (err: any) {
       const msg = err instanceof Error ? err.message : JSON.stringify(err);
-      console.error(`Error when fetching name from wfil contract: ${msg}`);
+      console.error(`Failed to get total wfil supply: ${msg}`);
     }
   });
