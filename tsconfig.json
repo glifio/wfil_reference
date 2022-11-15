@@ -5,6 +5,9 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@ipld/dag-cbor": ["node_modules/@ipld/dag-cbor/cjs/index.js"]
+    }
   }
 }

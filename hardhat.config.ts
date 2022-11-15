@@ -3,6 +3,7 @@ import { HardhatUserConfig } from "hardhat/config";
 import "hardhat-preprocessor";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-deploy";
+import "tsconfig-paths/register";
 import "./tasks";
 
 function getRemappings() {

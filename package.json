@@ -34,8 +34,10 @@
     "@glif/filecoin-address": "^2.0.18",
     "@glif/filecoin-rpc-client": "^2.0.8",
     "@glif/filecoin-wallet-provider": "^2.0.18",
+    "@ipld/dag-cbor": "^7.0.3",
     "ethereumjs-tx": "^2.1.2",
     "hardhat-deploy": "^0.11.18",
-    "hardhat-deploy-ethers": "^0.3.0-beta.13"
+    "hardhat-deploy-ethers": "^0.3.0-beta.13",
+    "tsconfig-paths": "^4.1.0"
   }
 }

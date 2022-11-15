@@ -1,5 +1,6 @@
 import { ethers as Ethers } from "hardhat";
 import { WFILInterface } from "../typechain-types/src/WFIL";
+import { decode } from '@ipld/dag-cbor';
 
 declare var task: any;
 declare var ethers: typeof Ethers;
@@ -7,6 +8,12 @@ declare var ethers: typeof Ethers;
 interface TaskArgs {
   params: string
   return?: string
+}
+
+const cborToHex = (base64: string) => {
+  const bufferRaw = Buffer.from(base64, 'base64')
+  const bufferDecoded = Buffer.from(decode(bufferRaw))
+  return `0x${bufferDecoded.toString('hex')}`
 }
 
 task("decodeParams", "Decode base64 parameters from Lotus messages")
@@ -17,16 +24,14 @@ task("decodeParams", "Decode base64 parameters from Lotus messages")
       const WFIL = await ethers.getContractFactory("WFIL");
       const iface = WFIL.interface as WFILInterface
 
-      const paramsBuffer = Buffer.from(params, 'base64').subarray(2)
-      const paramsHex = `0x${paramsBuffer.toString('hex')}`
-      const parsedTx = iface.parseTransaction({ data: paramsHex })
+      const data = cborToHex(params)
+      const parsedTx = iface.parseTransaction({ data })
 
-      console.log(`Input data: ${paramsHex}`)
+      console.log(`Input data: ${data}`)
       console.log('Parsed transaction:', parsedTx)
 
       if (returnVal) {
-        const returnBuffer = Buffer.from(returnVal, 'base64').subarray(2)
-        const returnHex = `0x${returnBuffer.toString('hex')}`
+        const returnHex = cborToHex(returnVal)
         const result = iface.decodeFunctionResult(parsedTx.name as any, returnHex)
 
         console.log(`Return data: ${returnHex}`)
