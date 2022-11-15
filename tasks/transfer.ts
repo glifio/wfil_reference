@@ -3,16 +3,16 @@ import { ethers as Ethers } from "hardhat";
 import { HttpNetworkConfig } from "hardhat/types";
 import { FeeMarketEIP1559Transaction } from "@ethereumjs/tx";
 import { WFIL } from "../typechain-types";
-import { deriveAddrsFromPk } from "../utils";
+import { deriveAddrsFromPk, toEthAddr } from "../utils";
 
 declare var task: any;
 declare var ethers: typeof Ethers;
 declare var network: { config: HttpNetworkConfig };
 
 interface TaskArgs {
-  contract: string
-  amount: string
-  to: string
+  contract: string;
+  amount: string;
+  to: string;
 }
 
 task("transfer", "Transfer wrapped FIL to another account")
@@ -24,7 +24,7 @@ task("transfer", "Transfer wrapped FIL to another account")
       const [signer] = await ethers.getSigners();
       const WFIL = await ethers.getContractFactory("WFIL");
       const contract = new ethers.Contract(
-        contractAddr,
+        toEthAddr(contractAddr),
         WFIL.interface,
         signer
       ) as WFIL;
@@ -41,8 +41,11 @@ task("transfer", "Transfer wrapped FIL to another account")
         delimeter: "_",
       });
 
-      const amountBigNr = ethers.utils.parseUnits(amount, "ether")
-      const data = contract.interface.encodeFunctionData("transfer", [to, amountBigNr]);
+      const amountBigNr = ethers.utils.parseUnits(amount, "ether");
+      const data = contract.interface.encodeFunctionData("transfer", [
+        toEthAddr(to),
+        amountBigNr,
+      ]);
       const filRpc = new RpcEngine({ apiAddress: network.config.url });
       const priorityFee = await ethRpc.request("maxPriorityFeePerGas");
       const nonce = await filRpc.request("MpoolGetNonce", delegatedActor);
@@ -50,7 +53,7 @@ task("transfer", "Transfer wrapped FIL to another account")
       const txObject = {
         nonce,
         gasLimit: 1000000000, // BlockGasLimit / 10
-        to: contractAddr,
+        to: toEthAddr(contractAddr),
         value: "0x00",
         maxPriorityFeePerGas: priorityFee,
         maxFeePerGas: "0x2E90EDD000",

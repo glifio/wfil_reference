@@ -1,4 +1,8 @@
-import { CoinType, newDelegatedEthAddress } from "@glif/filecoin-address";
+import {
+  CoinType,
+  ethAddressFromDelegated,
+  newDelegatedEthAddress,
+} from "@glif/filecoin-address";
 import RpcEngine from "@glif/filecoin-rpc-client";
 import { SECP256K1KeyProvider } from "@glif/filecoin-wallet-provider";
 
@@ -33,4 +37,13 @@ export const deriveAddrsFromPk = async (
   }
 
   return { secpActor, idActor, idActorHex, delegatedActor };
+};
+
+export const toEthAddr = (addr: string): string => {
+  try {
+    const address = ethAddressFromDelegated(addr);
+    return address;
+  } catch {
+    return addr;
+  }
 };

@@ -3,15 +3,15 @@ import { ethers as Ethers } from "hardhat";
 import { HttpNetworkConfig } from "hardhat/types";
 import { FeeMarketEIP1559Transaction } from "@ethereumjs/tx";
 import { WFIL } from "../typechain-types";
-import { deriveAddrsFromPk } from "../utils";
+import { deriveAddrsFromPk, toEthAddr } from "../utils";
 
 declare var task: any;
 declare var ethers: typeof Ethers;
 declare var network: { config: HttpNetworkConfig };
 
 interface TaskArgs {
-  contract: string
-  amount: string
+  contract: string;
+  amount: string;
 }
 
 task("deposit", "Deposit FIL for wrapped FIL")
@@ -22,7 +22,7 @@ task("deposit", "Deposit FIL for wrapped FIL")
       const [signer] = await ethers.getSigners();
       const WFIL = await ethers.getContractFactory("WFIL");
       const contract = new ethers.Contract(
-        contractAddr,
+        toEthAddr(contractAddr),
         WFIL.interface,
         signer
       ) as WFIL;
@@ -47,7 +47,7 @@ task("deposit", "Deposit FIL for wrapped FIL")
       const txObject = {
         nonce,
         gasLimit: 1000000000, // BlockGasLimit / 10
-        to: contractAddr,
+        to: toEthAddr(contractAddr),
         value: ethers.utils.parseUnits(amount, "ether").toHexString(),
         maxPriorityFeePerGas: priorityFee,
         maxFeePerGas: "0x2E90EDD000",
